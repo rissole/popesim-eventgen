@@ -1,3 +1,8 @@
+# PS2014 Event Creator
+
+ * Popal Simulator? This has to be some kind of joke. _Good, keep believing that._
+
+```
 EVENT
 string "ename" -- event name (required)
 string "place" -- event place (required, acceptable input: Misc, PressConference, CardinalMeeting, Conversation, Balcony, Sleeping, Praying, Letters)
@@ -22,3 +27,4 @@ This lets us do things like have 20% chance of one effect happening, then if tha
 string[] "stat" -- the stat which this effect will affect (required, acceptable input: Hope, Love, Faith, PopeHappiness, CardinalHappiness, Piety, GameOver)
 char[] "mod" -- how the stat will be modified (required, acceptable input: +, -, =, *, /)
 float[] "amount" -- the amount to modifiy the stat by (required)
+```
