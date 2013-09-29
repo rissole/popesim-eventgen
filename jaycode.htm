@@ -1,0 +1,241 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<title>Make a Pope Event</title>
+
+		<script type="text/javascript">
+			// The event object, which will be converted to JSON output and given to the user.
+			var event = {};
+
+			// This creates the event object from the user's input.
+			function makeEvent()
+			{
+				// Populate main event data.
+				event["ename"] = document.getElementById("eventname").value; // Name
+				event["place"] = document.getElementById("eventplace").value; // Place
+				checkIfAddToObj(event,"dependencies","eventprereqs",false, true); // Dependencies
+				checkIfAddToObj(event,"day","eventdays", false, false); // Day of the week
+				var mintime = document.getElementById("eventmintime").value; // Minimum time
+				if(mintime != "") // Only check for max time if the user filled out min time
+				{
+					var time = [];
+					time[0] = parseFloat(mintime);
+					time[1] = parseFloat(document.getElementById("eventmaxtime").value);
+					event["time"] = time;
+				}
+				// Check if we need to meet a certain level in a stat
+				if(checkIfAddToObj(event,"triggerstat","statprereq", false, false))
+				{
+					// If so, go ahead and add the details about how we're supposed to meet it
+					checkIfAddToObj(event,"mod","statprereqop", false, false);
+					checkIfAddToObj(event,"amount","statprereqamount",true);
+				}
+				checkIfAddToObj(event,"chance","eventchance", false, false); // Event chance
+				checkIfAddToObj(event,"text","eventtext", false, false); // Actual text displayed to user
+				// See how many responses to make
+				var responsecounter = document.getElementById("responsecount").value; 
+				if(responsecounter != "") // Assume empty string is no responses
+				{
+					var responseint = parseInt(responsecounter);
+					var responses = [];
+					for(var i = 0; i < responseint; i++)
+					{
+						responses[i] = makeResponse(i); // Make all the responses the user wants
+					}
+					event["responses"] = responses; // Put them in the event object
+				}
+				var output = document.getElementById("output"); // Find the output element
+				output.innerHTML = JSON.stringify(event, null, "<br>"); // Display as a JSON string
+			}
+
+			// Makes a response object.
+			// Param num: the index of this response (first response is 0, second is 1, etc.)
+			function makeResponse(num)
+			{
+				var response = {};
+				checkIfAddToObj(response, "text", "responsetext" + num, false, false); // Text user sees
+				checkIfAddToObj(response, "nextevent", "responseevent" + num, false, false); // Next event to fire if this is chosen
+				checkIfAddToObj(response, "headline", "responseheadline" + num, false, false); // The newspaper headline for this response.
+				var effectcounter = document.getElementById("effectscounter" + num).value; // See how many effects to make
+				if(effectcounter != "") // Assume empty string is no effects
+				{
+					var effectint = parseInt(effectcounter);
+					var effects = [];
+					for(var i = 0; i < effectint; i++)
+					{
+						effects[i] = makeEffect("effectscounter" + num, i); // Create all the effects for this
+					}
+					response["effects"] = effects; // Store them in the response object
+				}
+				return response;
+			}
+
+			// Makes an effect object.
+			// Param id: The index of the response
+			// Param num: The index of the effect
+			function makeEffect(id, num)
+			{
+				var effect = {};
+				// Create name strings:
+				var statsname = id+"stats"+num;
+				var modsname = id+"mod"+num;
+				var amountsname = id+"amount"+num;
+				var chancesname = id+"chance"+num;
+				// Fetch values:
+				checkIfAddToObj(effect, "stat", statsname, false, true);
+				checkIfAddToObj(effect, "chance", chancesname, false, true);
+				checkIfAddToObj(effect, "mod", modsname, false, true);
+				checkIfAddToObj(effect, "amount", amountsname, false, true);
+				return effect;
+			}
+
+			// Checks to see if an element both a.) exists and b.) has something in it.
+			// If an element does not exist or is empty, does nothing and returns false.
+			// Otherwise, we add the value of the element to an object specified by obj.
+			// Param obj: The object to add our value to.
+			// Param eventchild: If we can find a value, this is the variable name it is assigned to.
+			// Param documentname: The name of the element we're looking for.
+			// Param parseifint: If true, converts strings to ints.
+			// Param splitalongcommas: If true, turns the value string into an array, split along commas.
+			function checkIfAddToObj(obj, eventchild, documentname, parseifint, splitalongcommas)
+			{
+				var element = document.getElementById(documentname);
+				if(element == null)
+				{
+					alert("Could not find "+documentname+"!"); // For debugging, should never happen
+					return false;
+				}
+				var value = element.value;
+				if(value == "")
+					return false; // Don't bother creating a variable if the value is empty
+				if(splitalongcommas) // Create array
+				{
+					var splitvalues = value.split(',');
+					if(parseifint)
+					{
+						var endvalues = []; // Create an empty array to hold the ints.
+						for(var i = 0; i < splitvalues.length; i++)
+						{
+							endvalues[i] = parseInt(splitvalues[i]);
+						}
+						obj[eventchild] = endvalues;
+					}
+					else
+					{
+						obj[eventchild] = splitvalues;
+					}
+				}
+				else // Don't create array, just assign the value directly
+				{
+					if(parseifint)
+					{
+						obj[eventchild] = parseInt(value);
+					}
+					else
+					{
+						obj[eventchild] = value;
+					}
+				}
+				return true; // We were successful in finding and adding the value.
+			}
+
+			// Creates the response HTML.
+			function makeResponses()
+			{
+				var responsecount = parseInt(document.getElementById("responsecount").value); // Get the number of resposnses to make
+				var out = document.getElementById("responses") // Find the response div
+				out.innerHTML = ""; // Reset the HTML in the response div
+				for(var i = 0; i < responsecount; i++)
+				{
+					out.innerHTML += "<p>Response number " + (i + 1) + ":";
+					// Response text (making direct HTML doesn't seem to work for some reason):
+					var newResponse = document.createElement("textarea");
+					newResponse.setAttribute("id", "responsetext" + i);
+					newResponse.setAttribute("rows", "3");
+					newResponse.setAttribute("cols","50");
+					out.appendChild(newResponse);
+					// Next event in chain:
+					out.innerHTML += "<br>Enter the name of the next event in this chain. Leave blank if choosing this response breaks the event chain.</br>";
+					out.innerHTML += "<br><input type=\"text\" id=\"responseevent" + i + "\"/></br>"
+					// Newspaper Headline:
+					out.innerHTML += "<br>If choosing this response makes a newspaper headline, enter it below. Leave it blank if there is no headline.</br>";
+					out.innerHTML += "<br><input type=\"text\" id=\"responseheadline\""+i+"/></br>
+					// Number of effects:
+					out.innerHTML += "<br>Enter the number of effects that happen when choosing this response:</br>";
+					out.innerHTML += "<br><input type=\"text\" id=\"effectscounter" + i + "\" onkeyup=\"makeEffects(this);\"/></br>"
+					out.innerHTML += "<br><div id=\"effectscounter" + i + "text\"></div></br></p>"
+				}
+			}
+
+			// Creates the effects HTML.
+			// Param effectcounter: The element containing the number of effects the user wants us to make.
+			function makeEffects(effectcounter)
+			{
+				var effectcount = parseInt(effectcounter.value); // See how many effects to make
+				var id = effectcounter.id; // Cache our name
+				var out = document.getElementById(id+"text"); // Look for output
+				out.innerHTML = ""; // Reset HTML
+				for(var i = 0; i < effectcount; i++)
+				{
+					out.innerHTML += "<p>";
+					out.innerHTML += "<br>Effect number " + (i + 1) + ":</br>";
+					// Stats
+					out.innerHTML += "<br>Enter all stats to be affected, separated by commas.</br>";
+					if(i == 0) // Only list the acceptable input on the first iteration through the loop
+					{
+						out.innerHTML += "<br>Acceptable input: Faith, Hope, Love, PopeHappiness, CardinalHappiness, Piety, GameOver</br>";
+					}
+					out.innerHTML += "<br><input type=\"text\" id=\""+id+"stats"+i+"\"/></br>";
+					// Modifiers
+					out.innerHTML += "<br>Enter how each stat will be modified, separated by commas.</br>";
+					if(i == 0)
+					{
+						out.innerHTML += "<br>Acceptable input: +, *, -, /, =.</br>";
+					}
+					out.innerHTML += "<br>Keep them in the same order as you did the stats, so that the first modifier is applied to the first stat, second modifier to the second, etc.</br>";
+					out.innerHTML += "<br><input type=\"text\" id=\""+id+"mod"+i+"\"/></br>";
+					// Modify amount
+					out.innerHTML += "<br>Enter the amount to modify each stat by.</br>";
+					out.innerHTML += "<br><input type=\"text\" id=\""+id+"amount"+i+"\"/></br>";
+					// Chance of happening
+					out.innerHTML += "<br>Enter the chance of each stat happening as a percentage of 100. ";
+					out.innerHTML += "If the first possible effect does not happen, it moves on to the second, then if that doesn't happen the third, etc.</br>";
+					out.innerHTML += "<br>The chance counter is reset each time, so if the first stat isn't chosen but the second stat has a 100% chance to happen, it will happen.";
+					out.innerHTML += "If the second stat has a 50% chance to happen, it will happen half the time.</br>";
+					out.innerHTML += "<br><input type=\"text\" id=\""+id+"chance"+i+"\"/></br>";
+					out.innerHTML += "</p>";
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<p>Enter Event name here. This must be unique!
+		<br><input type="text" id="eventname"/></br>
+		<br>Enter where this event takes place.</br>
+		<br>Acceptable input: Misc, PressConference, CardinalMeeting, Balcony, Sleeping, Praying, Letters</br>
+		<br><input type="text" id="eventplace"/></br>
+		<br>Enter the name of any events this event is dependent on, separated by commas. All events listed must have fired before this one is legal.</br>
+		<br>Leave blank if there are no prerequisite events.</br>
+		<br><input type="text" id="eventprereqs"/></br>
+		<br>Enter the days that this event will fire on (i.e. Monday, Tuesday, Wednesday), separated by commas. Leave blank if it can fire any day.</br>
+		<br><input type="text" id="eventdays"/></br>
+		<br>Enter the time this event is able to be fired, from midnight (00.00) to 11:59 PM (23.99). The first box is the earliest it can be fired, the second is the latest.
+		<br>Leave blank if it can fire at any time.</br>
+		<input type="text" id="eventmintime" maxlength=5 size=5/><input type="text" id="eventmaxtime" maxlength=5 size=5/>
+		<br>Enter a condition that must be true before this event can be fired. One operator goes in each box.</br>
+		<br>For example: Faith > 23 will only fire if the Pope's "Faith" stat is higher than 23, while Faith = 23 will only fire if Faith is <b>exactly</b> 23.</br>
+		<br>Leave blank if the event is not dependent upon stats.</br>
+		<br><input type="text" id="statprereq"/><input type="text" id="statprereqop" maxlength=1 size=1/><input type="text" id="statprereqamount" maxlength=3 size=3/></br></p>
+		<br>Enter the chance of this event firing, from 1-100. 100 means it will always fire if it is chosen by the random number generator.</br>
+		<br><input type="text" id="eventchance" maxlength=3 size=3/></br>
+		<p>Enter the text which is shown to the player:
+		<br><textarea rows="3" cols="50" id="eventtext"></textarea></br></p>
+		<p>Enter number of possible responses:
+		<br><input type="text" id="responsecount" onkeyup="makeResponses();"/></br>
+		<br><div id="responses"></div></br></p>
+		<p><input type="submit" value="Make my event!" onclick="makeEvent();"/></p>
+		Your event:
+		<div id="output"></div>
+	</body>
+</html>

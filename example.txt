@@ -1,0 +1,752 @@
+[
+{
+	"ename" : "Athiest Pope",
+	"place" : "PressConference",
+	"responses" : [
+		{
+			"effects" : [
+				{
+					"amount" : [
+						3
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"+"
+					],
+					"stat" : [
+						"Faith"
+					]
+				},
+				{
+					"amount" : [
+						5
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"-"
+					],
+					"stat" : [
+						"Love"
+					]
+				}
+			],
+			"text" : "No, my child. My faith in God is unshakable, and nothing any heathen can possibly say will change that fact."
+		},
+		{
+			"effects" : [
+				{
+					"amount" : [
+						3
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"+"
+					],
+					"stat" : [
+						"Hope"
+					]
+				},
+				{
+					"amount" : [
+						5
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"-"
+					],
+					"stat" : [
+						"Faith"
+					]
+				}
+			],
+			"text" : "Should sufficient evidence arise that contradicts a tenet of the Catholic Church, then the tenets of the Catholic Church shall have to be revised. That said, as someone who speaks to the Lord each day, I have no plans of denying that He exists."
+		},
+		{
+			"effects" : [
+				{
+					"amount" : [
+						3
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"+"
+					],
+					"stat" : [
+						"Love"
+					]
+				},
+				{
+					"amount" : [
+						5
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"-"
+					],
+					"stat" : [
+						"CardinalHappiness"
+					]
+				}
+			],
+			"text" : "I have and always will place my faith first and foremost in the Lord. However, Our Lord and Savior Jesus Christ loves atheists every bit as much as He does His own children. In turn, those who do not believe in God must obey their own conscience: if they do not, they sin and need to ask for mercy with contrition and a sincere heart."
+		},
+		{
+			"effects"	: 
+			[
+				{
+					"amount" : [
+						100
+					],
+					"chance" : [
+						95,
+						100
+					],
+					"mod" : [
+						=
+					],
+					"stat" : [
+						"pope happiness",
+						"game over"
+					]
+				},
+				{
+					"amount" : [
+						5
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"/"
+					],
+					"stat" : [
+						"faith"
+					]
+				},
+				{
+					"amount" : [
+						5
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"/"
+					],
+					"stat" : [
+						"hope"
+					]
+				},
+				{
+					"amount" : [
+						5
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"/"
+					],
+					"stat" : [
+						"love"
+					]
+				},
+				{
+					"amount" : [
+						10
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"/"
+					],
+					"stat" : [
+						"cardinal happiness"
+					]
+				},
+				{
+					"amount" : [
+						10
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"/"
+					],
+					"stat" : [
+						"piety"
+					]
+				}
+			],
+			"text" : "In this moment, I am euphoric. Not because of any phony god's blessing. But because, I am enlightened by my intelligence."
+		}
+	],
+	"text" : "Your holiness, is it true that comments on the internet have caused you to question your faith?"
+},
+{
+	"ename" : "Spanish Inquisition",
+
+	"chance": "25",
+	"place" : "Misc",
+	"responses" : [
+		{
+			"effects" : [
+				{
+					"chance" : [
+						10
+					],
+					"stat" : [
+						"GameOver"
+					]
+				},
+				{
+					"amount" : [
+						2
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"+"
+					],
+					"stat" : [
+						"Faith"
+					]
+				},
+				{
+					"amount" : [
+						2
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"+"
+					],
+					"stat" : [
+						"Hope"
+					]
+				},
+				{
+					"amount" : [
+						2
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"+"
+					],
+					"stat" : [
+						"Love"
+					]
+				},
+				{
+					"amount" : [
+						3
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"-"
+					],
+					"stat" : [
+						"PopeHappiness"
+					]
+				},
+				{
+					"amount" : [
+						2
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"+"
+					],
+					"stat" : [
+						"Piety"
+					]
+				},
+				{
+					"amount" : [
+						7
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"-"
+					],
+					"stat" : [
+						"CardinalHappiness"
+					]
+				}
+			],
+			"text" : "Guilty! I confess my sins and I repent before the power and glory of our one true Lord and Savior Jesus Christ! I beg for your forgiveness."
+		},
+		{
+			"effects" : [
+				{
+					"chance" : [
+						5
+					],
+					"stat" : [
+						"GameOver"
+					]
+				},
+				{
+					"amount" : [
+						5
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"+"
+					],
+					"stat" : [
+						"CardinalHappiness"
+					]
+				},
+				{
+					"amount" : [
+						5
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"-"
+					],
+					"stat" : [
+						"Piety"
+					]
+				},
+				{
+					"amount" : [
+						4
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"+"
+					],
+					"stat" : [
+						"PopeHappiness"
+					]
+				},
+				{
+					"amount" : [
+						2
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"-"
+					],
+					"stat" : [
+						"Faith"
+					]
+				},
+				{
+					"amount" : [
+						2
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"-"
+					],
+					"stat" : [
+						"Hope"
+					]
+				},
+				{
+					"amount" : [
+						2
+					],
+					"chance" : [
+						100
+					],
+					"mod" : [
+						"-"
+					],
+					"stat" : [
+						"Love"
+					]
+				}
+			],
+			"text" : "How dare you?! I am innocent! I shall have you all excommunicated at once!"
+		}
+	],
+	"text" : "Suddenly, a group of cardinals burst into the room. \"Nobody ever expects the Spanish Inquisition!\" they cry. \"You, sir, are charged with heresy!\"",
+	"triggerAmount" : 25,
+	"triggerMod" : "<",
+	"triggerStat" : "Piety"
+},
+{	"ename": "Etchasketchistan",
+
+	"place": "Misc",
+
+	"chance": "25",
+
+	"text": "You have received news of an earthquake in the tiny country of Etchasketchistan. The entire population was wiped out.",
+	"responses": [
+		{
+			"text": "The Godly denizens of Etchasketchistan are now in the Lord's hands. May he bless their souls into the afterlife.",
+
+			"effects": [
+
+				{
+
+					"stat": [
+
+						"Piety"
+
+					],
+
+					"chance": [
+
+						"100"
+
+					],
+
+					"mod": [
+
+						"+"
+					],
+
+					"amount": [
+
+						"3"
+
+					]
+
+				},
+
+				{
+
+					"stat": [
+
+						"CardinalHappiness"
+
+					],
+
+					"chance": [
+
+						"100"
+
+					],
+
+					"mod": [
+
+						"+"
+
+					],
+
+					"amount": [
+
+						"2"
+
+					]
+
+				},
+
+				{
+
+					"stat": [
+
+						"PopeHappiness"
+
+					],
+
+					"chance": [
+
+						"100"
+
+					],
+
+					"mod": [
+
+						"-"
+
+					],
+
+					"amount": [
+
+						"7"
+
+					]
+
+				}
+
+			]
+
+		},
+
+		{
+
+			"text": "This is how the Lord punishes heathens and sinners! May the Godly of the world look upon Etchasketchistan and quiver under the effects of His might!",
+
+			"effects": [
+
+				{
+
+					"stat": [
+
+						"Faith"
+
+					],
+
+					"chance": [
+
+						"100"
+
+					],
+
+					"mod": [
+
+						"+"
+
+					],
+
+					"amount": [
+
+						"5"
+
+					]
+
+				},
+
+				{
+
+					"stat": [
+
+						"Hope"
+
+					],
+
+					"chance": [
+
+						"100"
+
+					],
+
+					"mod": [
+
+						"-"
+
+					],
+
+					"amount": [
+
+						"3"
+
+					]
+
+				},
+
+				{
+
+					"stat": [
+
+						"Love"
+
+					],
+
+					"chance": [
+
+						"100"
+
+					],
+
+					"mod": [
+
+						"+"
+
+					],
+
+					"amount": [
+
+						"4"
+
+					]
+
+				}
+
+			]
+
+		},
+
+		{
+
+			"text": "The Vatican will personally divert some of its funds to help the Etchasketchis rebuild in their time of need.",
+
+			"effects": [
+
+				{
+
+					"stat": [
+
+						"Love"
+
+					],
+
+					"chance": [
+
+						"100"
+
+					],
+
+					"mod": [
+
+						"+"
+
+					],
+
+					"amount": [
+
+						"5"
+
+					]
+
+				},
+
+				{
+
+					"stat": [
+
+						"Faith"
+
+					],
+
+					"chance": [
+
+						"100"
+
+					],
+
+					"mod": [
+
+						"+"
+
+					],
+
+					"amount": [
+
+						"5"
+
+					]
+
+				},
+
+				{
+
+					"stat": [
+
+						"Hope"
+
+					],
+
+					"chance": [
+
+						"100"
+
+					],
+
+					"mod": [
+
+						"+"
+
+					],
+
+					"amount": [
+
+						"5"
+
+					]
+
+				},
+
+				{
+
+					"stat": [
+
+						"PopeHappiness"
+
+					],
+
+					"chance": [
+
+						"100"
+
+					],
+
+					"mod": [
+
+						"-"
+
+					],
+
+					"amount": [
+
+						"8"
+
+					]
+
+				},
+
+				{
+
+					"stat": [
+
+						"CardinalHappiness"
+
+					],
+
+					"chance": [
+
+						"100"
+
+					],
+
+					"mod": [
+
+						"-"
+
+					],
+
+					"amount": [
+
+						"9"
+
+					]
+
+				}
+
+			]
+
+		}
+
+	]
+}
+]
