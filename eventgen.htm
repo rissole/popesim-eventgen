@@ -16,6 +16,63 @@
         <fieldset>
             <label>Event name</label>
             <input type="text" placeholder="Event name" name="ename">
+			<label>Event place</label>
+			<select class="form-control" name="eplace">
+			  <option>Misc</option>
+			  <option>PressConference</option>
+			  <option>CardinalMeeting</option>
+			  <option>Conversation</option>
+			  <option>Balcony</option>
+			  <option>Sleeping</option>
+			  <option>Praying</option>
+			  <option>Letters</option>
+			</select>
+			<label>Day(s) event can fire on</label>
+			<label class="checkbox-inline">
+			  <input type="checkbox" id="inlineCheckbox1" value="option1" checked="checked"> Sunday
+			</label>
+			<label class="checkbox-inline">
+			  <input type="checkbox" id="inlineCheckbox2" value="option2" checked="checked"> Monday
+			</label>
+			<label class="checkbox-inline">
+			  <input type="checkbox" id="inlineCheckbox3" value="option3" checked="checked"> Tuesday
+			</label>
+			<label class="checkbox-inline">
+			  <input type="checkbox" id="inlineCheckbox3" value="option3" checked="checked"> Wednesday
+			</label>
+			<label class="checkbox-inline">
+			  <input type="checkbox" id="inlineCheckbox3" value="option3" checked="checked"> Thursday
+			</label>
+			<label class="checkbox-inline">
+			  <input type="checkbox" id="inlineCheckbox3" value="option3" checked="checked"> Friday
+			</label>
+			<label class="checkbox-inline">
+			  <input type="checkbox" id="inlineCheckbox3" value="option3" checked="checked"> Saturday
+			</label>
+			<label>Earliest time of day event can happen (optional)</label>
+			<input type="time" class="form-control" name="mintime">
+			<label>Latest time of day event can happen (optional)</label>
+			<input type="time" class="form-control" name="maxtime">
+			<label>Stat prerequisite</label>
+			<select class="form-control" name="estat">
+			  <option>None</option>
+			  <option>Hope</option>
+			  <option>Love</option>
+			  <option>Faith</option>
+			  <option>PopeHappiness</option>
+			  <option>CardinalHappiness</option>
+			  <option>Piety</option>
+			  <option>GameOver</option>
+			  </select>
+			<select class="form-control" name="emod">
+			  <option> </option>
+			  <option><</option>
+			  <option>></option>
+			  <option>=</option>
+			</select>
+			<input type="number" class="form-control" name="eamount" min="0" max="100" value="100">
+			<label>Chance of event happening</label>
+			<input type="number" class="form-control" name="chance" min="0" max="100" value="100">
             <div class="form-actions">
                 <button id="createButton" type="submit" class="btn btn-primary">Create Event</button>
             </div>
