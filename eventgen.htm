@@ -16,6 +16,22 @@
         <fieldset>
             <label>Event name</label>
             <input type="text" placeholder="Event name" name="ename">
+            
+            <label>Place</label>
+            <select id="placeDropDown" name="place"></select>
+            
+            <label>Text</label>
+            <textarea name="text"></textarea>
+            
+            <label>Dependencies</label>
+            <div id="dependencyControls" class="form-horizontal">
+                <div class="control-group" style="display: none">
+                    <input type="text" placeholder="Dependency event name" name="dependencies">
+                    <button type="button" class="btn btn-danger" onclick="remove_dependency(this)"><i class="icon-minus-sign icon-white"></i></a>
+                </div>
+            </div>
+            <button id="addDependencyButton" type="button" class="btn">Add dependency</button>
+            
             <div class="form-actions">
                 <button id="createButton" type="submit" class="btn btn-primary">Create Event</button>
             </div>
@@ -33,6 +49,7 @@
 
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="js/eventdata.js"></script>
 <script src="js/eventcreator.js"></script>
 </body>
 </html>
