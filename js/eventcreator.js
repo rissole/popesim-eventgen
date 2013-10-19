@@ -15,17 +15,13 @@ $('#eventForm').submit(function() {
         if (fieldControls.length == 1) {
             output[field] = fieldControls.val();
         }
-        // if there are many, its field value is an array of the controls' values.
-        else if (fieldControls.length != 0) {
+        // if there are many (or 0), its field value is an array of the controls' values.
+        else {
             
             output[field] = [];
             fieldControls.each(function(i, fieldControl) {
                 output[field].push(fieldControl.val());
             });
-        }
-        // if there are 0 controls... bummer.
-        else {
-            console.error("ERROR - could not find field control for '"+field+"'");
         }
     });
     
