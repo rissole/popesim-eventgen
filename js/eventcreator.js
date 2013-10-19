@@ -17,9 +17,9 @@ $('#eventForm').submit(function() {
         }
         // if there are many (or 0), its field value is an array of the controls' values.
         else {
-            
             output[field] = [];
             fieldControls.each(function(i, fieldControl) {
+                fieldControl = $(fieldControl);
                 output[field].push(fieldControl.val());
             });
         }
