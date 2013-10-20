@@ -23,17 +23,19 @@
             <label for="eventText">Text</label>
             <textarea id="eventText" placeholder="Event text" name="text" required></textarea>
             
-            <label for="dependencyControls">Dependencies</label>
-            <div id="dependencyControls" class="form-horizontal">
-                <div class="control-group" style="display: none">
-                    <input type="text" placeholder="Dependency event name" name="prereqs">
-                    <button type="button" class="btn btn-danger" onclick="remove_control(this)"><i class="icon-minus-sign icon-white"></i></a>
+            <div class="control-group">
+                <label for="dependencyControls">Dependencies</label>
+                <div id="dependencyControls" class="form-horizontal">
+                    <div class="control-group" style="display: none">
+                        <input type="text" placeholder="Dependency event name" name="prereqs">
+                        <button type="button" title="Remove Dependency" class="btn btn-danger" onclick="remove_control(this)"><i class="icon-remove icon-white"></i></button>
+                    </div>
                 </div>
+                <button id="addDependencyButton" type="button" class="btn">Add Dependency</button>
             </div>
-            <button id="addDependencyButton" type="button" class="btn">Add dependency</button>
 			
 			<label for="dayControls">Day(s) event can fire</label>
-			<select multiple class="form-control" id="dayControls" name="prereqday" size=7>
+			<select multiple id="dayControls" name="prereqday" size=7>
 			  <option selected="true">Sunday</option>
 			  <option selected="true">Monday</option>
 			  <option selected="true">Tuesday</option>
@@ -43,69 +45,84 @@
 			  <option selected="true">Saturday</option>
 			</select>
 			
-			<div id="timeControls" class="form-horizontal">
-				<label for="minTime">Earliest time of day event can happen</label>
-				<input type="time" class="form-control" id="minTime" name="prereqtime">
-				<label for="maxTime">Latest time of day event can happen</label>
-				<input type="time" class="form-control" id="maxTime" name="prereqtime">
-			</div>
+            <div class="control-group">
+                <label for="minTime">Earliest time of day event can happen</label>
+                <input type="time" id="minTime" name="prereqtime">
+            </div>
+            <div class="control-group">
+                <label for="maxTime">Latest time of day event can happen</label>
+                <input type="time" id="maxTime" name="prereqtime">
+            </div>
 			
-			<label for="statPrereqControls">Stat prerequisite</label>
-			<div id="statPrereqControls" class="form-horizontal">
-				<select id="prereqStatDropDown" name="prereqstat">
-					<option>None</option>
-				</select>
-				<select id="prereqModDropDown" name="prereqmod" disabled>
-				  <option><</option>
-				  <option>></option>
-				  <option>=</option>
-				</select>
-				<input type="number" id="prereqStatAmount" name="prereqamount" min="0" max="100" value="100" disabled>
-			</div>
+            <div class="control-group">
+                <label for="statPrereqControls">Stat prerequisite</label>
+                <div id="statPrereqControls" class="form-horizontal">
+                    <select id="prereqStatDropDown" name="prereqstat">
+                        <option>None</option>
+                    </select>
+                    <select id="prereqModDropDown" name="prereqmod" disabled>
+                      <option><</option>
+                      <option>></option>
+                      <option>=</option>
+                    </select>
+                    <input type="number" id="prereqStatAmount" name="prereqamount" min="0" max="100" value="100" disabled>
+                </div>
+            </div>
 			
-			<label for="eventChance">Chance of event happening</label>
+			<label for="eventChance">Chance of Event happening</label>
 			<input type="number" id="eventChance" name="eventchance" min="1" max="100" value="100">            
             
 			<label for="responseControls">Responses</label>
-            <div id="responseControls" class="form-horizontal">
+            <div id="responseControls">
                 <div class="control-group well" style="display: none">
-					<button type="button" class="btn btn-danger" onclick="remove_control(this)"><strong>Remove Response</strong> <i class="icon-minus-sign icon-white"></i></a></button>
-					</p>
-					<label>Response Text</label>
-					<textarea placeholder="Response text" name="responsetext"></textarea>
-					<label>Name of next event</label>
+					<button type="button" title="Remove Response" class="btn btn-danger pull-right" onclick="remove_control(this)"><i class="icon-remove icon-white"></i></button>
+                    
+                    <label>Response text</label>
+                    <textarea placeholder="Response text" name="responsetext"></textarea>
+                    
+					<label>Name of next Event</label>
 					<input type="text" placeholder="Next event name" name="nextevent">
-					<label>Newspaper Headline</label>
+                    
+					<label>Newspaper headline</label>
 					<input type="text" placeholder="Newspaper headline" name="headline">
-					</p>
-					<label for="effectChainControls">Effect Chains</label>
-					<div id="effectChainControls" class="control-group well">
-						<button type="button" class="btn btn-danger" onclick="remove_control(this)"><strong>Remove Effect Chain</strong> <i class="icon-minus-sign icon-white"></i></a></button>
-						</p>
-						The game will iterate down each effect in an effect chain until one succeeds or it runs out of effects.
-						As soon as an effect succeeds, that effect chain is ended and the game moves on to the next effect chain for that response.
-						</p>
-						<div id="effectControls" class="control-group well">
-							<button type="button" class="btn btn-danger" onclick="remove_control(this)"><strong>Remove Effect</strong> <i class="icon-minus-sign icon-white"></i></a></button>
-							</p>
-							<label>Chance effect happens</label>
-							<input type="number" name="effectchance" min="1" max="100" value="100">
-							<label>Stat adjustment amount</label>
-							<div class="form-horizontal">
-								<select id="effectStatDropDown" name="effectstat"></select>
-								<select name="effectmod">
-								  <option>-</option>
-								  <option>+</option>
-								  <option>=</option>
-								  <option>*</option>
-								  <option>/</option>
-								</select>
-								<input type="number" name="effectamount" min="0" max="100" value="0">
-							</div>
-						</div>
-						<button id="addEffectButton" type="button" class="btn">Add Effect</button>
-					</div>
-					<button id="addEffectChainButton" type="button" class="btn">Add Effect Chain</button>
+                    
+					<label>Effect Groups <a title="An Effect Group is a collection of Effects. One Effect per Group is applied based on probabilities entered."><i class="icon-question-sign"></i></a></label>
+                    
+                    <div class="effectGroupControls">
+                        <div class="control-group well" name="effectgroup" style="display: none">
+                            <button type="button" title="Remove Effect Group" class="btn btn-danger pull-right" onclick="remove_control(this)"><i class="icon-remove icon-white"></i></button>
+                            <div class="clearfix control-group">
+                                Effects <a title="An Effect is a collection of Stat modifications, with probability."><i class="icon-question-sign"></i></a>
+                            </div>
+                            <div class="effectControls">
+                                <div class="control-group well" name="effect" style="display: none">
+                                    <button type="button" title="Remove Effect" class="btn btn-danger pull-right" onclick="remove_control(this)"><i class="icon-remove icon-white"></i></button>
+                                    <label>Chance effect happens</label>
+                                    <input type="number" name="effectchance" min="1" max="100" value="100">
+                                    <label>Stat adjustments</label>
+                                    <div class="statControls">
+                                        <div class="form-horizontal control-group" name="stat" style="display: none">
+                                            <select id="effectStatDropDown" name="effectstat"></select>
+                                            <select name="effectmod">
+                                              <option>-</option>
+                                              <option>+</option>
+                                              <option>=</option>
+                                              <option>*</option>
+                                              <option>/</option>
+                                            </select>
+                                            <input type="number" name="effectamount" min="0" max="100" value="0">
+                                            <button type="button" title="Remove Stat Adjustment" class="btn btn-danger" onclick="remove_control(this)"><i class="icon-minus icon-white"></i></button>
+                                        </div>
+                                    </div>
+                                    <button type="button" title="Add Stat Adjustment" class="btn btn-success" onclick="add_stat(this)"><i class="icon-plus icon-white"></i></button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn" onclick="add_effect(this)">Add Effect</button>
+                        </div>
+                    </div>
+                    
+					<button type="button" class="btn" onclick="add_effect_group(this)">Add Effect Group</button>
+                    
                 </div>
             </div>
             <button id="addResponseButton" type="button" class="btn">Add Response</button>

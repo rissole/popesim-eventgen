@@ -71,3 +71,18 @@ $('#prereqStatDropDown').on('change', function(){
 function remove_control(elem) {
     $(elem).parent('.control-group').remove();
 }
+
+// Add Effect Group on click
+function add_effect_group(elem) {
+    $(elem).siblings('.effectGroupControls').append($(elem).siblings('.effectGroupControls').find('div[name=effectgroup]:first').clone().show());
+}
+
+// Add Effect on click
+function add_effect(elem) {
+    $(elem).siblings('.effectControls').append($(elem).siblings('.effectControls').find('div[name=effect]:first').clone().show());
+}
+
+// Add Stat on click
+function add_stat(elem) {
+    $(elem).siblings('.statControls').append($(elem).siblings('.statControls').find('div[name=stat]:first').clone().show());
+}
