@@ -17,8 +17,7 @@ var EVENT_STATS = [
 	"Faith",
 	"PopeHappiness",
 	"CardinalHappiness",
-	"Piety",
-	"GameOver"
+	"Piety"
 ];
 
 var EVENT_FIELDS = [

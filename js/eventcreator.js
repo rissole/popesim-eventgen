@@ -25,7 +25,7 @@ $('#eventForm').submit(function() {
         }
     });
     
-    $('#output textarea').val(JSON.stringify(output));
+    $('#output textarea').val(JSON.stringify(output, null, '\t'));
     $('#output').show();
     return false;
 });
@@ -37,9 +37,13 @@ $.each(EVENT_PLACE, function(i, place) {
 
 // Populate Stats dropdown
 $.each(EVENT_STATS, function(i, stat) {
-	$('#prereqStatDropDown').append('<option>' + stat + '</option');
-	$('#effectStatDropDown').append('<option>' + stat + '</option');
+	$('#prereqStatDropDown').append('<option>' + stat + '</option>');
+	$('#effectStatDropDown').append('<option>' + stat + '</option>');
 });
+
+
+// Special case, effect has a chance of ending the game as well
+$('#effectStatDropDown').append('<option>GameOver</option>');
 
 // 'Add Dependency' on click
 $('#addDependencyButton').click(function() {
@@ -51,10 +55,10 @@ $('#addResponseButton').click(function() {
     $('#responseControls').append($('#responseControls > div:first').clone().show());
 });
 
-// Disable other dropdowns when the stat dropdown equals 'Game Over'
+// Disable other dropdowns when the prerequisite stat dropdown equals 'None'
 $('#prereqStatDropDown').on('change', function(){
 	var dropDownVal = $('#prereqStatDropDown').val();
-	if(dropDownVal == "GameOver" || dropDownVal == "None")
+	if(dropDownVal == "None")
 	{
 		$('#prereqModDropDown').prop('disabled', true);
 		$('#prereqStatAmount').prop('disabled', true);
@@ -64,7 +68,7 @@ $('#prereqStatDropDown').on('change', function(){
 		$('#prereqModDropDown').prop('disabled', false);
 		$('#prereqStatAmount').prop('disabled', false);
 	}
-}); 
+});
 });
 
 // Control delete button on click
