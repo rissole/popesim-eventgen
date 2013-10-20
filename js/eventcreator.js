@@ -35,14 +35,39 @@ $.each(EVENT_PLACE, function(i, place) {
     $('#placeDropDown').append('<option>' + place + '</option>');
 });
 
+// Populate Stats dropdown
+$.each(EVENT_STATS, function(i, stat) {
+	$('#prereqStatDropDown').append('<option>' + stat + '</option');
+	$('#effectStatDropDown').append('<option>' + stat + '</option');
+});
+
 // 'Add Dependency' on click
 $('#addDependencyButton').click(function() {
     $('#dependencyControls').append($('#dependencyControls > div:first').clone().show());
 });
 
+// 'Add Response' on click
+$('#addResponseButton').click(function() {
+    $('#responseControls').append($('#responseControls > div:first').clone().show());
 });
 
-// Dependency delete button on click
-function remove_dependency(elem) {
+// Disable other dropdowns when the stat dropdown equals 'Game Over'
+$('#prereqStatDropDown').on('change', function(){
+	var dropDownVal = $('#prereqStatDropDown').val();
+	if(dropDownVal == "GameOver" || dropDownVal == "None")
+	{
+		$('#prereqModDropDown').prop('disabled', true);
+		$('#prereqStatAmount').prop('disabled', true);
+	}
+	else if($('#prereqModDropDown').is(':disabled'))
+	{
+		$('#prereqModDropDown').prop('disabled', false);
+		$('#prereqStatAmount').prop('disabled', false);
+	}
+}); 
+});
+
+// Control delete button on click
+function remove_control(elem) {
     $(elem).parent('.control-group').remove();
 }

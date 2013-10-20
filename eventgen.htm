@@ -14,25 +14,103 @@
     </div>
     <form id="eventForm">
         <fieldset>
-            <label>Event name</label>
-            <input type="text" placeholder="Event name" name="ename">
-            
-            <label>Place</label>
+            <label for="eventName">Event name</label>
+            <input type="text" id="eventName" placeholder="Event name" name="eventname" required autofocus>
+			
+			<label for="placeDropDown">Place</label>
             <select id="placeDropDown" name="place"></select>
             
-            <label>Text</label>
-            <textarea name="text"></textarea>
+            <label for="eventText">Text</label>
+            <textarea id="eventText" placeholder="Event text" name="text" required></textarea>
             
-            <label>Dependencies</label>
+            <label for="dependencyControls">Dependencies</label>
             <div id="dependencyControls" class="form-horizontal">
                 <div class="control-group" style="display: none">
-                    <input type="text" placeholder="Dependency event name" name="dependencies">
-                    <button type="button" class="btn btn-danger" onclick="remove_dependency(this)"><i class="icon-minus-sign icon-white"></i></a>
+                    <input type="text" placeholder="Dependency event name" name="prereqs">
+                    <button type="button" class="btn btn-danger" onclick="remove_control(this)"><i class="icon-minus-sign icon-white"></i></a>
                 </div>
             </div>
             <button id="addDependencyButton" type="button" class="btn">Add dependency</button>
+			
+			<label for="dayControls">Day(s) event can fire</label>
+			<select multiple class="form-control" id="dayControls" name="prereqday" size=7>
+			  <option selected="true">Sunday</option>
+			  <option selected="true">Monday</option>
+			  <option selected="true">Tuesday</option>
+			  <option selected="true">Wednesday</option>
+			  <option selected="true">Thursday</option>
+			  <option selected="true">Friday</option>
+			  <option selected="true">Saturday</option>
+			</select>
+			
+			<div id="timeControls" class="form-horizontal">
+				<label for="minTime">Earliest time of day event can happen</label>
+				<input type="time" class="form-control" id="minTime" name="prereqtime">
+				<label for="maxTime">Latest time of day event can happen</label>
+				<input type="time" class="form-control" id="maxTime" name="prereqtime">
+			</div>
+			
+			<label for="statPrereqControls">Stat prerequisite</label>
+			<div id="statPrereqControls" class="form-horizontal">
+				<select id="prereqStatDropDown" name="prereqstat">
+					<option>None</option>
+				</select>
+				<select id="prereqModDropDown" name="prereqmod" disabled>
+				  <option><</option>
+				  <option>></option>
+				  <option>=</option>
+				</select>
+				<input type="number" id="prereqStatAmount" name="prereqamount" min="0" max="100" value="100" disabled>
+			</div>
+			
+			<label for="eventChance">Chance of event happening</label>
+			<input type="number" id="eventChance" name="eventchance" min="1" max="100" value="100">            
             
-            <div class="form-actions">
+			<label for="responseControls">Responses</label>
+            <div id="responseControls" class="form-horizontal">
+                <div class="control-group well" style="display: none">
+					<button type="button" class="btn btn-danger" onclick="remove_control(this)"><strong>Remove Response</strong> <i class="icon-minus-sign icon-white"></i></a></button>
+					</p>
+					<label>Response Text</label>
+					<textarea placeholder="Response text" name="responsetext"></textarea>
+					<label>Name of next event</label>
+					<input type="text" placeholder="Next event name" name="nextevent">
+					<label>Newspaper Headline</label>
+					<input type="text" placeholder="Newspaper headline" name="headline">
+					</p>
+					<label for="effectChainControls">Effect Chains</label>
+					<div id="effectChainControls" class="control-group well">
+						<button type="button" class="btn btn-danger" onclick="remove_control(this)"><strong>Remove Effect Chain</strong> <i class="icon-minus-sign icon-white"></i></a></button>
+						</p>
+						The game will iterate down each effect in an effect chain until one succeeds or it runs out of effects.
+						As soon as an effect succeeds, that effect chain is ended and the game moves on to the next effect chain for that response.
+						</p>
+						<div id="effectControls" class="control-group well">
+							<button type="button" class="btn btn-danger" onclick="remove_control(this)"><strong>Remove Effect</strong> <i class="icon-minus-sign icon-white"></i></a></button>
+							</p>
+							<label>Chance effect happens</label>
+							<input type="number" name="effectchance" min="1" max="100" value="100">
+							<label>Stat adjustment amount</label>
+							<div class="form-horizontal">
+								<select id="effectStatDropDown" name="effectstat"></select>
+								<select name="effectmod">
+								  <option>-</option>
+								  <option>+</option>
+								  <option>=</option>
+								  <option>*</option>
+								  <option>/</option>
+								</select>
+								<input type="number" name="effectamount" min="0" max="100" value="0">
+							</div>
+						</div>
+						<button id="addEffectButton" type="button" class="btn">Add Effect</button>
+					</div>
+					<button id="addEffectChainButton" type="button" class="btn">Add Effect Chain</button>
+                </div>
+            </div>
+            <button id="addResponseButton" type="button" class="btn">Add Response</button>
+			
+			<div class="form-actions">
                 <button id="createButton" type="submit" class="btn btn-primary">Create Event</button>
             </div>
         </fieldset>

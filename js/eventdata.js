@@ -11,9 +11,25 @@ var EVENT_PLACE = [
     "Letters"
 ];
 
+var EVENT_STATS = [
+	"Hope",
+	"Love",
+	"Faith",
+	"PopeHappiness",
+	"CardinalHappiness",
+	"Piety",
+	"GameOver"
+];
+
 var EVENT_FIELDS = [
-    "ename",
+    "eventname",
     "place",
     "text",
-    "dependencies"
+    "prereqs",
+	"prereqday",
+	"prereqtime",
+	"prereqstat",
+	"prereqmod",
+	"prereqamount",
+	"eventchance"
 ];
