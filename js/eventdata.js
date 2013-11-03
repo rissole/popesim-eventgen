@@ -17,8 +17,7 @@ var EVENT_STATS = [
 	"Faith",
 	"PopeHappiness",
 	"CardinalHappiness",
-	"Piety",
-	"GameOver"
+	"Piety"
 ];
 
 var EVENT_FIELDS = [
@@ -31,5 +30,20 @@ var EVENT_FIELDS = [
 	"prereqstat",
 	"prereqmod",
 	"prereqamount",
-	"eventchance"
+	"eventchance",
+	"loadlevel"
 ];
+
+var RESPONSE_FIELDS = [
+	"responsetext",
+	"nextevent",
+	"headline",
+	"subheadline"
+]
+
+var EFFECT_FIELDS = [
+	"effectchance",
+	"effectstat",
+	"effectmod",
+	"effectamount"
+]

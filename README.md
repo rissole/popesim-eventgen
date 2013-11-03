@@ -10,7 +10,9 @@ string "text" -- text of event (required)
 string[] "prereqs" -- list of event dependencies (optional)
 string "prereqday" -- day that the event can fire on (optional)
 float[] "prereqtime" -- time event can take place in, in format [min time, max time] (optional)
-string "prereqstat", char "prereqmod", float "prereqamount" -- event won't fire unless this is true (i.e. faith > 50, love < 25, etc.) (optional)
+string "prereqstat"
+char "prereqmod" 
+float "prereqamount" -- event won't fire unless this is true (i.e. faith > 50, love < 25, etc.) (optional)
 float "eventchance" -- chance of event happening, from 1 to 100 (optional)
 Response[] responses -- all responses to this event (optional; no responses puts "OK" button)
 
@@ -18,6 +20,7 @@ RESPONSE
 string "responsetext" -- response text (required)
 string "nextevent" -- next event in response chain (optional)
 string "headline" -- newspaper headline associated with response (optional)
+string "subheadline" -- newspaper subheadline associated with response (optional)
 Effect[] effects -- list of various effects which happen when this event is chosen (optional)
 
 EFFECT
