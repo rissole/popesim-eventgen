@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<title>Papal Simulator Event Creator</title>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
 
 <div class="container">
     <div class="page-header">
-    <h1>Papal Simulator 2014 <small>Event Creator</small></h1>
+		<h1>Papal Simulator 2014 <small>Event Creator</small></h1>
     </div>
     <form id="eventForm">
         <fieldset>
@@ -54,6 +55,9 @@
                 <input type="time" id="maxTime" name="prereqtime">
             </div>
 			
+			<label for="loadLevel">Load Scene</label>
+            <input type="text" id="loadLevel" placeholder="Scene Name" name="loadlevel"></input>
+			
             <div class="control-group">
                 <label for="statPrereqControls">Stat prerequisite</label>
                 <div id="statPrereqControls" class="form-horizontal">
@@ -61,8 +65,8 @@
                         <option>None</option>
                     </select>
                     <select id="prereqModDropDown" name="prereqmod" disabled>
-                      <option><</option>
                       <option>></option>
+                      <option><</option>
                       <option>=</option>
                     </select>
                     <input type="number" id="prereqStatAmount" name="prereqamount" min="0" max="100" value="100" disabled>
@@ -74,7 +78,7 @@
             
 			<label for="responseControls">Responses</label>
             <div id="responseControls">
-                <div class="control-group well" style="display: none">
+                <div class="control-group well" name="responsegroup" style="display: none">
 					<button type="button" title="Remove Response" class="btn btn-danger pull-right" onclick="remove_control(this)"><i class="icon-remove icon-white"></i></button>
                     
                     <label>Response text</label>
@@ -85,6 +89,9 @@
                     
 					<label>Newspaper headline</label>
 					<input type="text" placeholder="Newspaper headline" name="headline">
+					
+					<label>Newspaper subheadline</label>
+					<input type="text" placeholder="Subheadline" name="subheadline">
                     
 					<label>Effect Groups <a title="An Effect Group is a collection of Effects. One Effect per Group is applied based on probabilities entered."><i class="icon-question-sign"></i></a></label>
                     
@@ -95,13 +102,13 @@
                                 Effects <a title="An Effect is a collection of Stat modifications, with probability."><i class="icon-question-sign"></i></a>
                             </div>
                             <div class="effectControls">
-                                <div class="control-group well" name="effect" style="display: none">
+                                <div class="control-group well" name="effect">
                                     <button type="button" title="Remove Effect" class="btn btn-danger pull-right" onclick="remove_control(this)"><i class="icon-remove icon-white"></i></button>
                                     <label>Chance effect happens</label>
-                                    <input type="number" name="effectchance" min="1" max="100" value="100">
+                                    <input type="number" name="effectchance" min="1" max="100" value="100" onchange="check_stat_button(this);">
                                     <label>Stat adjustments</label>
                                     <div class="statControls">
-                                        <div class="form-horizontal control-group" name="stat" style="display: none">
+                                        <div class="form-horizontal control-group" name="stat">
                                             <select id="effectStatDropDown" name="effectstat"></select>
                                             <select name="effectmod">
                                               <option>-</option>
@@ -117,7 +124,7 @@
                                     <button type="button" title="Add Stat Adjustment" class="btn btn-success" onclick="add_stat(this)"><i class="icon-plus icon-white"></i></button>
                                 </div>
                             </div>
-                            <button type="button" class="btn" onclick="add_effect(this)">Add Effect</button>
+                            <button type="button" class="btn" name="effectbutton" disabled onclick="add_effect(this)">Add Effect</button>
                         </div>
                     </div>
                     

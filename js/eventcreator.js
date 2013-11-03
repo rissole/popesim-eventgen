@@ -4,27 +4,9 @@ $(function() {
 
 // On Submit
 $('#eventForm').submit(function() {
-    var output = {};
-    
-    // EVENT_FIELDS defined in eventdata.js contains all the fields of an event.
-    $.each(EVENT_FIELDS, function(i, field) {
-        // search for all visible controls with that field name.
-        var fieldControls = $('[name='+field+']:visible');
-        
-        // if there is only one, its field value is merely the control's value.
-        if (fieldControls.length == 1) {
-            output[field] = fieldControls.val();
-        }
-        // if there are many (or 0), its field value is an array of the controls' values.
-        else {
-            output[field] = [];
-            fieldControls.each(function(i, fieldControl) {
-                fieldControl = $(fieldControl);
-                output[field].push(fieldControl.val());
-            });
-        }
-    });
-    
+	// EVENT_FIELDS defined in eventdata.js contains all the fields of an event.
+    var output = populate_object_values(EVENT_FIELDS, null);
+    output['responses'] = gather_responses();
     $('#output textarea').val(JSON.stringify(output, null, '\t'));
     $('#output').show();
     return false;
@@ -70,6 +52,95 @@ $('#prereqStatDropDown').on('change', function(){
 	}
 });
 });
+
+// Finds and creates all responses
+function gather_responses()
+{
+	var responses = [];
+	var responseControls = $('[name="responsegroup"]:visible');
+	for(var i = 0; i < responseControls.length; i++)
+	{
+		responses[i] = make_response(responseControls[i]);
+	}
+	return responses;
+}
+
+// Make an event response
+function make_response(elem)
+{
+	var response = populate_object_values(RESPONSE_FIELDS, elem);
+	response["effectchains"] = gather_effect_groups(elem);
+	return response;
+}
+
+// Finds and creates all the effect groups for a given response
+function gather_effect_groups(response)
+{
+	var output = [];
+	var input = $(response).find('[name="effectgroup"]:visible');
+	for(var i = 0; i < input.length; i++)
+	{
+		output[i] = make_effect_group(input[i]);
+	}
+	return output;
+}
+
+// Make effects for an effect group
+function make_effect_group(elem)
+{
+	var output = [];
+	var effects = $(elem).find('[name="effect"]:visible');
+	for(var i = 0; i < effects.length; i++)
+	{
+		output[i] = populate_object_values(EFFECT_FIELDS, effects[i]);
+	}
+	return output;
+}
+
+function populate_object_values(fields, parent)
+{
+	var output = {};
+    $.each(fields, function(i, field) {
+        // search for all visible controls with that field name.
+        var fieldControls = {};
+		
+		if(parent && $(parent.firstChild)) {
+			fieldControls = $(parent).find('[name="'+field+'"]:visible');
+		}
+		else {
+			fieldControls = $('[name="'+field+'"]:visible');
+		}
+        
+        // if there is only one, its field value is merely the control's value.
+        if (fieldControls.length == 1) {
+            output[field] = fieldControls.val();
+        }
+        // if there are many (or 0), its field value is an array of the controls' values.
+        else {
+            output[field] = [];
+            fieldControls.each(function(i, fieldControl) {
+                fieldControl = $(fieldControl);
+                output[field].push(fieldControl.val());
+            });
+        }
+    });
+	return output;
+}
+
+// Disables the "add stat" button if it would be impossible for the next stat in an effect to be modified
+function check_stat_button(elem)
+{
+	console.log("Checking stat button.");
+	var statButton = $(elem).parent().parent().siblings(['name="effectbutton"']);
+	if($(elem).val() == 100)
+	{
+		statButton.prop("disabled",true);
+	}
+	else
+	{
+		statButton.prop("disabled",false);
+	}
+}
 
 // Control delete button on click
 function remove_control(elem) {
